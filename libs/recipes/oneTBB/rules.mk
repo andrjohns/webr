@@ -26,5 +26,7 @@ $(ONETBB_WASM_LIB): $(ONETBB_TARBALL)
 	    -DEMSCRIPTEN_WITHOUT_PTHREAD=true \
 	    -DTBB_COMMON_COMPILE_FLAGS="-U__TBB_USE_ITT_NOTIFY" \
 	    .. && \
+		sed -i 's/-fexceptions/-fwasm-exceptions -fpic -Oz/g' src/tbb/CMakeFiles/tbb.dir/flags.make && \
+		sed -i 's/-fexceptions/-fwasm-exceptions -fpic -Oz/g' src/tbbmalloc/CMakeFiles/tbbmalloc.dir/flags.make && \
 	  cmake --build . && \
 	  cmake --install .
